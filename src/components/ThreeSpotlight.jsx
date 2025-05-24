@@ -3,7 +3,6 @@ import * as THREE from "three";
 import { PLYLoader } from "three/examples/jsm/loaders/PLYLoader.js";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js";
 import GUI from "lil-gui";
-import styles from "./ThreeSpotlight.module.css";
 
 const ThreeSpotlight = () => {
   const containerRef = useRef(null);
