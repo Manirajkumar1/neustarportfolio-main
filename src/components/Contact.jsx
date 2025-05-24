@@ -10,42 +10,32 @@ import {
   Button,
   FormControl,
   FormLabel,
-  IconButton,
-  useColorMode,
-  useColorModeValue,
   HStack,
+  useColorModeValue,
 } from '@chakra-ui/react';
-import { MoonIcon, SunIcon } from '@chakra-ui/icons';
 
 const Contact = () => {
-  const { colorMode, toggleColorMode } = useColorMode();
-  const bg = useColorModeValue('white', 'gray.900');
-  const text = useColorModeValue('gray.700', 'gray.200');
-  const heading = useColorModeValue('gray.900', 'white');
-
   const handleSubmit = (e) => {
     e.preventDefault();
     // Handle form submission logic here
   };
 
-  return (
-      <Box py={16} bg={bg}>
-      <Container maxW="6xl">
-        {/* Light/Dark Toggle */}
-        <Box textAlign="right" mb={6}>
-          <IconButton
-            aria-label="Toggle theme"
-            icon={colorMode === 'light' ? <MoonIcon /> : <SunIcon />}
-            onClick={toggleColorMode}
-          />
-        </Box>
+  // Colors based on mode
+  const bgColor = useColorModeValue('white', 'gray.900');
+  const textColor = useColorModeValue('gray.700', 'gray.300');
+  const headingColor = useColorModeValue('gray.900', 'whiteAlpha.900');
+  const inputBg = useColorModeValue('gray.50', 'gray.800');
+  const inputBorder = useColorModeValue('gray.200', 'gray.600');
 
+  return (
+    <Box py={16} bg={bgColor}>
+      <Container maxW="6xl">
         {/* Section Header */}
         <Box textAlign="center" mb={12}>
-          <Heading fontFamily="serif" fontSize="4xl" color={heading} mb={2}>
+          <Heading fontFamily="serif" fontSize="4xl" color={headingColor} mb={2}>
             Get in Touch
           </Heading>
-          <Text fontSize="lg" color={text}>
+          <Text fontSize="lg" color={textColor}>
             Let's discuss how we can shape the future together
           </Text>
         </Box>
@@ -53,14 +43,14 @@ const Contact = () => {
         <SimpleGrid columns={{ base: 1, md: 2 }} spacing={12}>
           {/* Left Side: Contact Info */}
           <Box>
-            <Heading fontSize="2xl" fontFamily="serif" mb={4} color={heading}>
+            <Heading fontSize="2xl" fontFamily="serif" mb={4} color={headingColor}>
               Connect With Me
             </Heading>
-            <Text color={text} mb={6}>
+            <Text color={textColor} mb={6}>
               Whether you're interested in collaboration, innovation, or just want to chat about the future of technology, I'm always open to meaningful conversations.
             </Text>
 
-            <HStack spacing={2} ml={32}>
+            <HStack spacing={2} ml={{ base: 0, md: 32 }}>
               <Button as="a" href="#" variant="outline" colorScheme="gray" size="sm">
                 GitHub
               </Button>
@@ -71,25 +61,38 @@ const Contact = () => {
                 Twitter
               </Button>
             </HStack>
-
           </Box>
 
           {/* Right Side: Form */}
           <Box as="form" onSubmit={handleSubmit}>
             <VStack spacing={6}>
               <FormControl isRequired>
-                <FormLabel>Name</FormLabel>
-                <Input placeholder="Your name" />
+                <FormLabel color={headingColor}>Name</FormLabel>
+                <Input
+                  placeholder="Your name"
+                  bg={inputBg}
+                  borderColor={inputBorder}
+                />
               </FormControl>
 
               <FormControl isRequired>
-                <FormLabel>Email</FormLabel>
-                <Input type="email" placeholder="you@example.com" />
+                <FormLabel color={headingColor}>Email</FormLabel>
+                <Input
+                  type="email"
+                  placeholder="you@example.com"
+                  bg={inputBg}
+                  borderColor={inputBorder}
+                />
               </FormControl>
 
               <FormControl isRequired>
-                <FormLabel>Message</FormLabel>
-                <Textarea rows={4} placeholder="Your message" />
+                <FormLabel color={headingColor}>Message</FormLabel>
+                <Textarea
+                  rows={4}
+                  placeholder="Your message"
+                  bg={inputBg}
+                  borderColor={inputBorder}
+                />
               </FormControl>
 
               <Button colorScheme="blue" type="submit">
