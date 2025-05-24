@@ -1,4 +1,3 @@
-import React from 'react';
 import {
   Box,
   Image,
@@ -131,7 +130,7 @@ const ContentFeed = () => {
   const subText = useColorModeValue('gray.600', 'gray.400');
 
   return (
-    <Box py={24} bg={bg}>
+      <Box py={24} bg={bg}>
       <Container maxW="6xl">
         <Box textAlign="center" mb={16}>
           <Heading fontSize={{ base: '3xl', md: '4xl' }} color={headingColor} mb={4}>
