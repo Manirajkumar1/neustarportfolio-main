@@ -1,3 +1,4 @@
+import React, { useRef, useState } from 'react';
 import {
   Box,
   Container,
@@ -12,12 +13,48 @@ import {
   FormLabel,
   HStack,
   useColorModeValue,
+  useToast,
 } from '@chakra-ui/react';
+import emailjs from 'emailjs-com';
 
 const Contact = () => {
+  const form = useRef();
+  const toast = useToast();
+  const [loading, setLoading] = useState(false);
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Handle form submission logic here
+    setLoading(true);
+
+    emailjs
+      .sendForm(
+        process.env.REACT_APP_SERVICE_ID,
+        process.env.REACT_APP_TEMPLATE_ID,
+        form.current,
+        process.env.REACT_APP_PUBLIC_KEY
+      )
+      .then(
+        (result) => {
+          toast({
+            title: 'Message Sent.',
+            description: "We'll get back to you soon.",
+            status: 'success',
+            duration: 5000,
+            isClosable: true,
+          });
+          form.current.reset();
+        },
+        (error) => {
+          toast({
+            title: 'Error',
+            description: 'Something went wrong. Please try again.',
+            status: 'error',
+            duration: 5000,
+            isClosable: true,
+          });
+        }
+      )
+      .finally(() => setLoading(false));
   };
 
   // Colors based on mode
@@ -64,11 +101,12 @@ const Contact = () => {
           </Box>
 
           {/* Right Side: Form */}
-          <Box as="form" onSubmit={handleSubmit}>
+          <Box as="form" ref={form} onSubmit={handleSubmit}>
             <VStack spacing={6}>
               <FormControl isRequired>
                 <FormLabel color={headingColor}>Name</FormLabel>
                 <Input
+                  name="user_name"
                   placeholder="Your name"
                   bg={inputBg}
                   borderColor={inputBorder}
@@ -78,6 +116,7 @@ const Contact = () => {
               <FormControl isRequired>
                 <FormLabel color={headingColor}>Email</FormLabel>
                 <Input
+                  name="user_email"
                   type="email"
                   placeholder="you@example.com"
                   bg={inputBg}
@@ -88,6 +127,7 @@ const Contact = () => {
               <FormControl isRequired>
                 <FormLabel color={headingColor}>Message</FormLabel>
                 <Textarea
+                  name="message"
                   rows={4}
                   placeholder="Your message"
                   bg={inputBg}
@@ -95,7 +135,12 @@ const Contact = () => {
                 />
               </FormControl>
 
-              <Button colorScheme="blue" type="submit">
+              <Button
+                colorScheme="blue"
+                type="submit"
+                isLoading={loading}
+                loadingText="Sending"
+              >
                 Send Message
               </Button>
             </VStack>
