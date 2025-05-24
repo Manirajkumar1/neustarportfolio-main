@@ -1,4 +1,3 @@
-import React from 'react';
 import {
   Box,
   Container,
@@ -30,7 +29,7 @@ const Contact = () => {
   };
 
   return (
-    <Box py={16} bg={bg}>
+      <Box py={16} bg={bg}>
       <Container maxW="6xl">
         {/* Light/Dark Toggle */}
         <Box textAlign="right" mb={6}>
