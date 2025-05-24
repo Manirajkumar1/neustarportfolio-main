@@ -1,4 +1,4 @@
-import React from 'react';
+
 import {
   Box,
   Text,
@@ -16,7 +16,9 @@ import {
 import { CheckIcon, CloseIcon } from '@chakra-ui/icons';
 
 const PricingPlan = ({ title, price, description, features, isPopular = false }) => {
-  const borderColor = isPopular ? 'blue.500' : useColorModeValue('gray.200', 'gray.700');
+  const defaultBorderColor = useColorModeValue('gray.200', 'gray.700');
+const borderColor = isPopular ? 'blue.500' : defaultBorderColor;
+
 
   return (
     <Box
@@ -36,7 +38,6 @@ const PricingPlan = ({ title, price, description, features, isPopular = false })
           fontSize="xs"
           textAlign="center"
           py="1"
-          position="absolute"
           top="0"
           w="full"
           borderTopRadius="xl"

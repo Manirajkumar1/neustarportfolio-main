@@ -53,6 +53,7 @@ export default function Navbar() {
             <NavLink to="blog">Blog</NavLink>
             <NavLink to="contact">Contact</NavLink>
 
+
             <Button onClick={toggleColorMode}>
               {colorMode === "light" ? <MoonIcon /> : <SunIcon />}
             </Button>
