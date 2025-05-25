@@ -69,7 +69,6 @@ export default function Navbar() {
           fontSize={"18px"}
           fontWeight={600}
           display={{ base: "none", md: "block" }}
-          mx="auto"
         >
           NEUSTAR
         </Text>
